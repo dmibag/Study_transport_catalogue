@@ -1,0 +1,72 @@
+syntax = "proto3";
+
+
+import "transport_router.proto";
+import "map_renderer.proto";
+
+package transport_db;
+
+message Coordinates {
+    double lat = 1;
+    double lng = 2;
+}
+
+message Stop {
+	uint32 id = 1;
+	string name = 2;
+    Coordinates coord = 3;
+}
+
+message Stops {
+	repeated Stop stops = 1;
+}
+
+message Bus {
+	uint32 id = 1;
+    string name = 2;
+    repeated int32 stops = 3;
+    repeated int32 stops_unique = 4;
+    bool cicle = 5;
+}
+
+message Buses {
+	repeated Bus buses = 1;
+}
+
+message Distance {
+	uint32 stop_from = 1;
+	uint32 stop_to = 2;
+	uint32 distance = 3;
+}
+
+message Distances {
+	repeated Distance distances = 1;
+}
+
+message BaseTransportCatalogue {
+	Stops stops = 1;
+	Distances dists = 2;
+	Buses buses = 3;
+}
+
+message TransportCatalogue {
+	BaseTransportCatalogue transport = 1;
+	renderer_db.MapSettings map = 2;
+	router_db.Router router = 3;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

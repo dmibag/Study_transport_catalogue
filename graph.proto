@@ -1,0 +1,31 @@
+syntax = "proto3";
+
+package graph_db;
+
+message Edge {
+	uint32 from = 1;
+    uint32 to = 2;
+    double weight = 3;
+}
+message IncidenceList {
+	repeated uint64 edgeid = 1;
+}
+
+message EdgeData {
+    uint32 bus_id = 1;
+    uint32 stop_id = 2;
+    uint32 span_count = 3;
+    double weight_bus = 4;
+    double bus_wait_time = 5;
+}
+
+message EdgeIdToParams {
+	uint32 edgeid = 1;
+	EdgeData params = 2;
+} 
+
+message GraphClass {
+	repeated Edge edges = 1;
+	repeated IncidenceList incidence_lists = 2;
+	repeated EdgeIdToParams edgeid_to_params = 3;
+}

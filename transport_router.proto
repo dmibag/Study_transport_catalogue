@@ -1,0 +1,38 @@
+syntax = "proto3";
+
+import "graph.proto";
+
+package router_db;
+
+message RoutingSettings {
+    double bus_wait_time = 1;
+    double bus_velocity = 2;
+}
+
+message Prev {
+	uint32 prev_edge = 1;
+}
+message RouteInternalData {
+    double weight = 1;
+    Prev prev = 2;
+}
+message RouteInternalDataOpt {
+	RouteInternalData route_internal_data = 1; 
+}
+message VectorRID {
+	repeated RouteInternalDataOpt route_internal_data_opt = 1;
+}
+
+message RoutesInternalData {
+	repeated VectorRID vector_rid = 1;
+}
+
+message RouterClass {
+	RoutesInternalData routes_internal_data = 1;
+}
+
+message Router{
+	RoutingSettings route = 1;	
+	graph_db.GraphClass graph = 2;
+	RouterClass router = 3;
+} 
